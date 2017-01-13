@@ -4,7 +4,7 @@
 #
 Name     : diffoscope
 Version  : 1
-Release  : 1
+Release  : 2
 URL      : https://anonscm.debian.org/cgit/reproducible/diffoscope.git/snapshot/1d69f42b00fa6f05ca1a4ab8c5c90491f9676327.tar.gz
 Source0  : https://anonscm.debian.org/cgit/reproducible/diffoscope.git/snapshot/1d69f42b00fa6f05ca1a4ab8c5c90491f9676327.tar.gz
 Summary  : No detailed summary available
@@ -18,6 +18,7 @@ BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : python-dev
 BuildRequires : python-magic
+BuildRequires : python-rpm
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
