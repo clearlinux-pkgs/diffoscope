@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 67
-Release  : 7
+Release  : 8
 URL      : http://pypi.debian.net/diffoscope/diffoscope-67.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-67.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-67.tar.gz.asc
