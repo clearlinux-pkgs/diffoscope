@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 70
-Release  : 10
+Release  : 11
 URL      : http://pypi.debian.net/diffoscope/diffoscope-70.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-70.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-70.tar.gz.asc
@@ -52,7 +52,7 @@ python components for the diffoscope package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1486133958
+export SOURCE_DATE_EPOCH=1486134593
 python3 setup.py build -b py3
 
 %install
