@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0816B9E18C762BAD (mapreri@gmail.com)
 #
 Name     : diffoscope
-Version  : 70
-Release  : 11
-URL      : http://pypi.debian.net/diffoscope/diffoscope-70.tar.gz
-Source0  : http://pypi.debian.net/diffoscope/diffoscope-70.tar.gz
-Source99 : http://pypi.debian.net/diffoscope/diffoscope-70.tar.gz.asc
+Version  : 77
+Release  : 12
+URL      : http://pypi.debian.net/diffoscope/diffoscope-77.tar.gz
+Source0  : http://pypi.debian.net/diffoscope/diffoscope-77.tar.gz
+Source99 : http://pypi.debian.net/diffoscope/diffoscope-77.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -28,8 +28,8 @@ BuildRequires : setuptools
 %description
 diffoscope
 ==========
-.. image:: https://jenkins.debian.net/buildStatus/icon?job=reproducible_diffoscope_from_git_master&plastic=true
-:target: https://jenkins.debian.net/job/reproducible_diffoscope_from_git_master
+.. image:: https://badge.fury.io/py/diffoscope.svg
+:target: http://badge.fury.io/py/diffoscope
 
 %package bin
 Summary: bin components for the diffoscope package.
@@ -48,11 +48,11 @@ python components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-70
+%setup -q -n diffoscope-77
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1486134593
+export SOURCE_DATE_EPOCH=1487182300
 python3 setup.py build -b py3
 
 %install
