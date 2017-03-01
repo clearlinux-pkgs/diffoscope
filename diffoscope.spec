@@ -5,16 +5,18 @@
 # Source0 file verified with key 0x0816B9E18C762BAD (mapreri@gmail.com)
 #
 Name     : diffoscope
-Version  : 77
-Release  : 12
-URL      : http://pypi.debian.net/diffoscope/diffoscope-77.tar.gz
-Source0  : http://pypi.debian.net/diffoscope/diffoscope-77.tar.gz
-Source99 : http://pypi.debian.net/diffoscope/diffoscope-77.tar.gz.asc
+Version  : 78
+Release  : 13
+URL      : http://pypi.debian.net/diffoscope/diffoscope-78.tar.gz
+Source0  : http://pypi.debian.net/diffoscope/diffoscope-78.tar.gz
+Source99 : http://pypi.debian.net/diffoscope/diffoscope-78.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: diffoscope-bin
 Requires: diffoscope-python
+Requires: libarchive-c
+Requires: python-magic
 BuildRequires : libarchive-c
 BuildRequires : libarchive-dev
 BuildRequires : pbr
@@ -48,11 +50,11 @@ python components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-77
+%setup -q -n diffoscope-78
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1487182300
+export SOURCE_DATE_EPOCH=1488396651
 python3 setup.py build -b py3
 
 %install
