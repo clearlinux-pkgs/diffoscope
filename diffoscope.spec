@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 80
-Release  : 15
+Release  : 16
 URL      : http://pypi.debian.net/diffoscope/diffoscope-80.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-80.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-80.tar.gz.asc
@@ -54,12 +54,15 @@ python components for the diffoscope package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1489773833
+export SOURCE_DATE_EPOCH=1489885599
 python3 setup.py build -b py3
 
 %install
 rm -rf %{buildroot}
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
