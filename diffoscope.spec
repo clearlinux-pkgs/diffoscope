@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 80
-Release  : 16
-URL      : http://pypi.debian.net/diffoscope/diffoscope-80.tar.gz
-Source0  : http://pypi.debian.net/diffoscope/diffoscope-80.tar.gz
-Source99 : http://pypi.debian.net/diffoscope/diffoscope-80.tar.gz.asc
+Version  : 81
+Release  : 18
+URL      : http://pypi.debian.net/diffoscope/diffoscope-81.tar.gz
+Source0  : http://pypi.debian.net/diffoscope/diffoscope-81.tar.gz
+Source99 : http://pypi.debian.net/diffoscope/diffoscope-81.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -50,18 +50,18 @@ python components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-80
+%setup -q -n diffoscope-81
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1489885599
+export SOURCE_DATE_EPOCH=1490704920
 python3 setup.py build -b py3
 
 %install
 rm -rf %{buildroot}
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
-cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 
 %files
