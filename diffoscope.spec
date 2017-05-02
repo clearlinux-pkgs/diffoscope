@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 82
-Release  : 19
+Release  : 20
 URL      : http://pypi.debian.net/diffoscope/diffoscope-82.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-82.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-82.tar.gz.asc
