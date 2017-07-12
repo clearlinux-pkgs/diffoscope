@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 84
-Release  : 22
+Release  : 23
 URL      : http://pypi.debian.net/diffoscope/diffoscope-84.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-84.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-84.tar.gz.asc
@@ -28,7 +28,10 @@ BuildRequires : python3-dev
 BuildRequires : setuptools
 
 %description
+diffoscope
 ==========
+.. image:: https://badge.fury.io/py/diffoscope.svg
+:target: http://badge.fury.io/py/diffoscope
 
 %package bin
 Summary: bin components for the diffoscope package.
@@ -54,7 +57,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1499868178
+export SOURCE_DATE_EPOCH=1499871643
 python3 setup.py build -b py3
 
 %install
