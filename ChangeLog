@@ -1,5 +1,102 @@
+diffoscope (86) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * tests:
+    + binary: skip a test if the 'distro' module is not available.
+    + iso9660: avoid an overly-catching exception.
+  * debian/copyright: coalesce some file paragraphs and update information.
+
+  [ Guangyuan Yang ]
+  * tests:
+    + iso9660: support both cdrtools' genisoimage's versions of isoinfo.
+
+  [ Chris Lamb ]
+  * comparators:
+    + xml: Use ``name`` attribute over ``path`` to avoid leaking comparison
+      full path in output.
+  * Tidy diffoscope.progress a little.
+
+  [ Ximin Luo ]
+  * Add a --tool-prefix-binutils CLI flag.  Closes: #869868
+  * On non-GNU systems, prefer some tools that start with "g".  Closes: #871029
+  * presenters:
+    + html:
+      - Don't traverse children whose parents were already limited.
+        Closes: #871413
+
+  [ Santiago Torres-Arias ]
+  * diffoscope.progress:
+    + Support the new fork of python-progressbar.  Closes: #873157
+
+ -- Mattia Rizzolo <mattia@debian.org>  Sun, 03 Sep 2017 22:23:06 +0200
+
+diffoscope (85) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * tools:
+    + move from the deprecated platform.linux_distribution() to the external
+      python package "distro".  Add it as an optioanl dependency, as without it
+      distribution detection (i.e. `diffoscope --list-tools`) won't work.
+      Also add it as a Debian (hard) dependency, as it's a very lightway
+      package, and the usefulness it brings are great.
+    + add a get_package_provider() function, returning the package name
+      that best matches the system.
+  * exc:
+    + in RequiredToolNotFound.get_package(), just call the new
+      get_package_provider()
+  * debian/rules:
+    + recommends the defusedxml python package, to avoid using the python3's
+      standard xml library and its security holes.
+
+  [ Chris Lamb ]
+  * comparators:
+    + sqlite:
+      - Simplify file detection by rewriting manual `recognizes` call
+        with a `Sqlite3Database.RE_FILE_TYPE` definition.
+    + xml:
+      - Fix EPUB "missing file" tests; they ship a META-INF/container.xml file.
+
+  [ Ximin Luo ]
+  * comparators:
+    + factor common logic from various comparators into File.recognizes.
+    + more tidying up and making names consistent.
+    + directory:
+      - make stat(1) warning textually like the other warnings.
+      - bump stat(1) warning into an error.
+      - use getfacl(1) before lsattr(1) as it's more general.
+    + apk:
+      - less kludgy way of detecting APKs.  Closes: #868486
+  * main, logging:
+    + restore old logger settings to avoid pytest fail in certain situations.
+  * debian/rules:
+    + add a check to prevent additions of "DOS/MBR" file type.
+  * feeder:
+    + force a flush when writing output to diff.  Closes: #870049
+  * tests/comparators:
+    + directory:
+      - be less strict about the expected test output, to cope with a missing
+        `getfacl`.  Closes: #868534
+
+  [ Juliana Oliveira Rodrigues ]
+  * comparators:
+    + Add new XML comparator.  Closes: #866120
+      The comparator will use defusedxml if this is installed, to avoid
+      falling in known security holes coming from the XML specification.
+  * tests/comparators:
+    + apk:
+      - fix the tests after the addition of the XML comparator.
+    + image:
+      - fix test_ico_image for identify >= 6.9.8.
+
+  [ Guangyuan Yang ]
+  * tests/comparators:
+    + device:
+      - fix 2 cases for FreeBSD.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Mon, 31 Jul 2017 22:27:45 +0200
+
 diffoscope (84) unstable; urgency=medium
- .
+
   [ Ximin Luo ]
   * comparators:
     + directory:
@@ -54,15 +151,454 @@ diffoscope (84) unstable; urgency=medium
       - sqlite: test for sqlite 3.19.
       - fsimage: move the guestfs cache out of the default /var/tmp/ into a
         "more temporary" directory.
- .
+
   [ Mattia Rizzolo ]
   * debian/control: fix Vcs-Git field.
- .
+
   [ Chris Lamb ]
   * debian/control: bump Standards-Version to 4.0.0.
- .
+
   [ Daniel Shahaf ]
   * Fix markup in the man page synopsis.  Closes: #866577
+   Thanks to Niels Thykier for the report.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Wed, 12 Jul 2017 12:28:11 +0200
+
+diffoscope (83) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * New features:
+    * Add comparator for Fontconfig cache files.
+  * Bug fixes:
+    - Don't fail when run under perversely recursive input files. See
+      <https://research.swtch.com/zip> for more information. (Closes: #780761)
+    - Prevent a traceback when using --new-file with containers by passing
+      progress_name of the Member and not the member itself. (Closes: #861286)
+    - Drop passing has_differences around, fixing an issue with generating
+      files called '-'.
+  * Cleanups & refactoring:
+    - Reorder and rename FIFOFeeder arguments to prevent tools incorrectly
+      parsing as a SyntaxError.
+    - Refactor HTML and text presenters so they fit the same interface.
+    - Refactor Presenter to a singleton manager.
+    - Split output and configuration of presenters.
+    - Prevent abstraction-level violation by defining visual diff support on
+      the Presenter classes.
+    - Split diffoscope.difference into a feeders module.
+    - Document various variables.
+    - PEP8-ify and tidy a lot of files.
+
+  [ Ximin Luo ]
+  * New features:
+    - Add --max-container-depth CLI option.
+    - Add various traverse_* methods to Difference.
+    - Weigh elements in progress bar by their size.
+    - Add a reader for the JSON format.
+    - Add a --exclude-command CLI for filtering out long-running commands like
+      "readelf --debug-dump=info".
+    - Don't show +/- controls for differences with no children.
+    - Use unicode chars for the +/- controls instead of punctuation.
+  * Bug fixes:
+    - Fix --exclude control.tar.gz.
+    - Make the progress bar play nicely with --debug.
+    - When enforcing max-container-depth, show which internal files differ,
+      without showing details.
+    - Fix JSON presenter to handle recursion properly.
+    - Avoid a ZeroDivisionError in the progress bar
+    - Fix create_limited_print_func.
+  * Tests:
+    - Fix failing tests due to logging global state.
+    - Add tips about running with TMPDIR=/run/shm.
+  * Cleanups & refactoring:
+    - Remove unnecessary "dest" args to argparse.
+    - Refactor DirectoryContainer to be more similar to Container.
+    - Refactor Container abstract method names.
+    - Remove unused imports and tidy up Container.comparisons().
+    - rename get_{filtered => adjusted}_members_sizes for consistency.
+    - Move tests/comparators/utils up one directory.
+    - html-dir: show/hide diff comments which can be very large.
+    - Refactor html-dir presenter to a class instance avoiding global state.
+    - Move side-by-side and linediff algorithms to difference.py.
+    - difference: has_children -> has_visible_children, and take into account
+      comments.
+    - Move ydiff/linediff from diffoscope.{difference => diff} to group
+      unified_diff-related things together
+
+  [ Maria Glukhova ]
+  * New features:
+    - Add visual comparisons for JPEG, ICO, PNG and static GIF images.
+  * Test improvements:
+    - Test that external tools providers are being returned when tool is not
+      found.
+    - Add tests for OutputParserError and ContainerExtractionError.
+  * Cleanups & refactoring:
+    * Ignore text difference if we have a visual one.
+    * Fix link formatting and typo in README.
+    * Rename html_output to compute_visual_diffs and explain its purpose.
+    * Removed duplicated functions from diff.py.
+
+  [ Mattia Rizzolo ]
+  * Export junit-xml style test report when building on Jenkins.
+
+  [ anthraxx ]
+  * Extend external Arch Linux tools list.
+
+ -- Chris Lamb <lamby@debian.org>  Sun, 18 Jun 2017 15:34:59 +0800
+
+diffoscope (82) experimental; urgency=medium
+
+  [ Chris Lamb ]
+  * New features:
+    - Add support for comparing Pcap files. (Closes: #858867)
+    - Add support for .docx and .odt files via docx2txt & odt2txt.
+      (Closes: #859056)
+    - Add support for PGP files via pgpdump. (Closes: #859034)
+    - Add support for comparing Ogg Vorbis files.
+  * Bug fixes:
+    - Don't crash on invalid archives; print a useful error instead.
+      (Closes: #833697)
+    - Ensure tests and the runtime environment can locate binaries in
+      /usr/sbin (eg. tcpdump)
+  * Tests:
+    - Ensure that PATH is modified.
+    - Ensure @tool_required raises RequiredToolNotFound.
+    - Don't assume that /sbin/init exists; locate any /sbin binary manually and
+      then test for that. This should prevent FTBFS on travis-ci.org.
+    - Show packages installed in report output.
+  * Misc:
+    - comparators.bzip2: Don't print error output from bzip2 call.
+    - comparators.pcap: Show the delta, not the absolute time.
+    - Use /usr/share/dpkg/pkg-info.mk over manual calls to dpkg-parsechangelog
+      in debian/rules.
+    - Document PYTHONPATH usage when running tests in README.Source.
+    - Add internal documentation for @tool_required decorator.
+
+  [ beuc@beuc.net ]
+  * Display differences in zip platform-specific timestamps. (Closes: #859117)
+
+  [ Ximin Luo ]
+  * Add support for R .rds and .rdb object files.
+
+  [ Vagrant Cascadian ]
+  * Add support for .dtb (device tree blob) files (Closes: #861109).
+
+ -- Chris Lamb <lamby@debian.org>  Wed, 26 Apr 2017 16:17:57 +0200
+
+diffoscope (81) experimental; urgency=medium
+
+  [ Chris Lamb ]
+  * Correct meaningless "1234-content" metadata when introspecting files
+    within archives. This was a regression since #854723 due to the use of
+    auto-incrementing on-disk filenames. (Closes: #858223)
+  * Refactor get_compressed_content_name.
+
+  [ Ximin Luo ]
+  * Improve ISO9660/DOS/MBR check.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 27 Mar 2017 16:21:17 +0100
+
+diffoscope (80) experimental; urgency=medium
+
+  * Ensure that we really are using ImageMagick and not, for example, the
+    GraphicsMagick compatibility layer installed by
+    graphicsmagick-imagemagick-compat. (Closes: #857940)
+  * Factor out the unicode decoding of the identify -version output.
+  * travis.yml: Don't build tags.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 16 Mar 2017 17:06:45 +0100
+
+diffoscope (79) experimental; urgency=medium
+
+  [ Chris Lamb ]
+  * Extract SquashFS images in one go rather than per-file, speeding up (eg.)
+    Tails ISO comparison by ~10x.
+  * Support newer versions of cbfstool to avoid test failures.
+    (Closes: #856446)
+  * Skip icc test that varies on endian if the Debian-specific patch is not
+    present. (Closes: #856447)
+  * Compare GIF images using gifbuild. (Closes: #857610)
+  * Also interpret "DOS/MBR boot sector" files as ISO images as they may have
+    been processed by isohybrid.
+  * Progress bar:
+    - Hide bar if we are running with --debug mode.
+    - Update prior to working on an item so the displayed filename is correct.
+
+  [ Maria Glukhova ]
+  * Improve AndroidManifest.xml comparison for APK files.
+    - Indicate the AndroidManifest.xml type. (Closes: #850758)
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 16 Mar 2017 09:38:16 +0100
+
+diffoscope (78) unstable; urgency=medium
+
+  [ Brett Smith ]
+  * comparators.json:
+    + Catch bad JSON errors on Python pre-3.5.  Closes: #855233
+
+  [ Chris Lamb ]
+  * tests:
+    + Move normalize_zeros to more generic `utils.data` module.
+    + Fix tests that call xxd fail on jessie due to output change.
+      Closes: #855239
+
+  [ Ed Maste ]
+  * comparators.directory:
+    + Assume BSD-style stat(1) on FreeBSD.  Closes: #855169
+
+ -- Mattia Rizzolo <mattia@debian.org>  Sun, 26 Feb 2017 17:26:48 +0100
+
+diffoscope (77) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * tests/comparators/utils:
+    + Correct logic of module_exists, ensuring we correctly skip in case of
+      modules containing a dot in their name.  Closes: #854745
+  * comparators/utils/libarchive:
+    + No need to track archive directory locations.
+  * Add --exclude option.  Closes: #854783
+  * Add PyPI badge to README.rst.
+  * Update .travis.yml from http://travis.debian.net.
+
+  [ Mattia Rizzolo ]
+  * Add CVE reference to the changelog of v76.
+  * Add my key to debian/upstream/signing-key.asc.
+
+  [ Ximin Luo ]
+  * comparators/utils/libarchive:
+    + When extracting archives, try to keep directory sizes small.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Mon, 13 Feb 2017 16:25:02 +0100
+
+diffoscope (76) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * Extract archive members using an auto-incrementing integer, avoiding the
+    need to sanitise filenames and avoiding writes to arbitrary locations.
+    (Closes: #854723 - CVE-2017-0359)
+
+  [ Ximin Luo ]
+  * Simplify call to subprocess.Popen
+
+ -- Chris Lamb <lamby@debian.org>  Fri, 10 Feb 2017 11:37:52 +1300
+
+diffoscope (75) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * Fix ImportError in Debian comparator tests. This was caused by not
+    handling the case where ``importlib.find_spec`` was testing for a submodule
+    (ie. ``debian.Deb822``) where it will attempt to import the ``debian``
+    module and raise an exception if it does not exist. Thanks to Iain Lane for
+    initial patches. (Closes: #854670)
+
+  [ Ximin Luo ]
+  * Remove pointless use of a thread
+
+ -- Chris Lamb <lamby@debian.org>  Fri, 10 Feb 2017 09:28:47 +1300
+
+diffoscope (74) unstable; urgency=medium
+
+  * Add missing Recommends for comparators. This was a regression introduced in
+    version 71 due to lazily-importing them; they were then not available when
+    we called "--list-tools=debian" during package build. (Closes: #854655)
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 09 Feb 2017 16:58:28 +1300
+
+diffoscope (73) unstable; urgency=medium
+
+  * debian/tests/pytest: Remove spurious clipboard contents.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 09 Feb 2017 13:24:59 +1300
+
+diffoscope (72) unstable; urgency=medium
+
+  * Fix autopkgtest failures when Recommends are not installed.
+    (Closes: #854593)
+  * Specify <html lang="en"> in HTML output. (re. #849411)
+  * Tests:
+    - Add a "@skip_unless_module_exists" decorator.
+    - Show local variables in tracebacks.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 09 Feb 2017 12:49:40 +1300
+
+diffoscope (71) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * New features:
+    - Add a machine-readable JSON output format. (Closes: #850791)
+    - Show results from debugging packages last. (Closes: #820427)
+    - Add a --max-text-report-size option. (Closes: #851147)
+  * Bug fixes:
+    - Clean all temp files in signal handler thread instead of attempting to
+      bubble exception back to the main thread. (Closes: #852013)
+    - Prevent FTBFS by loading fixtures as UTF-8 in case surrounding terminal
+      is not Unicode-aware. (Closes: #852926)
+    - Fix errors when comparing directories with non-directories.
+      (Closes: #835641)
+    - Fix behaviour of setting report maximums to zero (ie. no limits)
+  * Tests:
+    - Test the RPM "fallback" comparison.
+    - Test the Deb{Changes,Buildinfo,Dsc} fallback comparisons.
+    - Test --progress and --status-fd output.
+    - Add tests for symlinks differing in destination.
+    - When comparing two empty directories, ensure that the mtime of the
+      directory is consistent to avoid non-deterministic failures.
+    - Smoke test profiling output.
+    - Ensure we ignore invalid JSON files correctly.
+    - Ensure 2nd source of a Difference is a string, not just the 1st.
+    - Don't report on test coverage for some internal error messages.
+  * Misc:
+    - Add docs about releasing signed tarballs.
+    - Drop the incomplete list of external tools from README.rst.
+    - Add debian/watch file with cryptographic signature verification.
+    - Drop CpioContent command now that we use libarchive.
+    - Use a singleton to manage our Comparator classes.
+    - Many small optimisations and code cleanups.
+
+  [ Brett Smith ]
+  * diffoscope.diff: Improve FIFO writing robustness.
+
+  [ Ximin Luo ]
+  * Fix bug introduced in commit 36d1c964 that only worked "accidentally".
+  * Fix lazy expression; filter is lazy in Python 3.
+
+  [ Mattia Rizzolo ]
+  * Override the debian-watch-file-in-native-package lintian tag.
+
+  [ anthraxx ]
+  * Arch package changed from cdrkit to cdrtools.
+
+  [ Holger Levsen ]
+  * Restore history section in README, explaining this was started in Debian.
+
+ -- Chris Lamb <lamby@debian.org>  Wed, 08 Feb 2017 13:02:01 +1300
+
+diffoscope (70) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * comparators
+    + haskell: add a comment describing the file header.
+      Thanks to James Clarke <jrtc27@debian.org> for all the investigation done.
+  * tests:
+    + Skip two more tests requiring a x86-64-capable binutils.
+      This fixes the tests on ppc64el.
+  * CONTRIBUTING: misc updates, clearer info about how to submit a Debian bug.
+
+  [ James Clarke ]
+  * comparators:
+    + haskell: Properly extract version from interface files.
+      What the code did before was just totally wrong, and worked only by
+      chance (and only on little endian systems).
+      This also fixes the test suite when run on big endian systems.
+
+  [ Chris Lamb ]
+  * comparators:
+    + haskell: Also catch CalledProcessError, not just OSError.
+  * presenters:
+    + Move text presenter to use Visitor pattern.
+    + Add markdown output support.  Closes: #848141
+    + Add RestructuredText output format.
+    + Instantiate our presenter classes directly instead of wrapping a method.
+    + Use an optimised indentation routine throughout all text presenters.
+    + text: Remove superfluous empty newlines from diff.
+  * tests:
+    + Split main and presenter tests.
+    + Actually compare the output of text/ReST/markdown formats to fixtures.
+    + Drop output_* calls that are inconsistently applied to differences.
+    + Add tests for HTML output.
+    + Add a test comparing two empty directories.
+    + Test --text-color output format.
+    + Test that no arguments (beyond the filenames) prints the text output.
+    + Don't warn about coverage lines that raise NotImplementedError.
+    + Increase coverage by adding "# noqa" in relevant parts.
+  * Add build status to README.rst.
+
+  [ Brett Smith ]
+  * diffoscope:
+    + Specify choices for --list-tools switch.
+    + Improve --help output.  Closes: #852015
+  * CONTRIBUTING: Refresh instructions for contributing to diffoscope.
+
+  [ anthraxx ]
+  * tools: switch Arch Linux dependency for pedump to mono.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Thu, 26 Jan 2017 16:39:10 +0100
+
+diffoscope (69) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * Skip tests if binutils can't handle the object file format. Based on a
+    patch by Mattia Rizzolo. (Closes: #851588)
+  * Move external tool definitions out of misleading "exceptions" module.
+  * Save some complicated logic by setting default RE_FILE_{EXTENSION,TYPE}
+  * Test --html-dir option.
+  * Misc:
+    * Add missing `data` imports.
+    - Inherit GzipFile from File, not object.
+    - Remove unused imports in comparator tests.
+    - Consistently space out environment exports in debian/rules.
+
+  [ Mattia Rizzolo ]
+  * If both RE_FILE_TYPE and RE_FILE_EXTENSION are defined, AND them
+  * Use the path attribute of the specialized file instead of the original name
+    in tests.
+  * tests/main:
+    * Shorten argument lists by unpacking common arguments.
+    * Disable jQuery while testing --htmldir so tests can run without it.
+  * tests/comparators:
+    * Refactor into packages with smaller modules.
+    * Rename load_fixture() to init_fixture().
+    * Add a load_fixture() function wrapping both init_fixture() and data().
+
+ -- Chris Lamb <lamby@debian.org>  Tue, 17 Jan 2017 11:33:54 +1100
+
+diffoscope (68) unstable; urgency=medium
+
+  [ Chris Lamb ]
+
+  * Don't blow up if directory containing ELF debug symbols already exists.
+    (Closes: #850807)
+  * Fix .APK extration when provided with absolute filenames.
+    (Closes: #850485)
+  * Support comparing .ico files using img2txt. (Closes: #850730)
+  * comparators.utils.file: If we don't have an archive-extraction tool (eg.
+    apktool), don't blow up when attempting to unpack it.
+  * Include magic file type when we know the file format but can't find
+    file-specific details. (Closes: #850850)
+  * Ensure fake "APK metadata" file appears first, fixing non-deterministic
+    tests/output.
+  * Correctly escape value of href="" elements (re. #849411)
+
+  * Optimisations:
+    - Disable profiling entirely (unless enabled) for a 2%+ optimisation
+    - Compile APK filename regex instead of generating it each loop.
+
+  * Logging:
+    - Log tempfile cleanup process
+    - Log when we add a progress observer.
+    - Drop milliseconds from log output
+
+  * Misc:
+    - Many unused import removals, indentation changes, etc.
+    - Fix duplicated word and long line errors in debian/changelog.
+    - Suggest some promotion in post-release documentation.
+
+  [ Maria Glukhova ]
+  * comparators/device: don't crash when comparing a non-device against a
+    device (Closes: #850055)
+  * Remove archive name from apktool.yml and rename it. (Closes: #850501)
+  * Zipinfo included in APK files comparison. (Closes: #850502)
+    - Add some tests for APK comparator.
+  * Add image metadata comparison. (Closes: #849395)
+  * Ensure imagemagick version is new enough for image metadata tests.
+
+  [ Mattia Rizzolo ]
+  * Skip the openssh_pub_key test if the version of ssh is < 6.9.
+  * comparators/icc: rename RE_FILE_EXTENSION to RE_FILE_TYPE, as that's what
+    the regular expression is looking for.
+  * Make use of a new mechanism to remove a bunch of recognizes() methods
+    dealing with simple RE_FILE_TYPE matching.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 16 Jan 2017 11:24:22 +1100
 
 diffoscope (67) unstable; urgency=medium
 
