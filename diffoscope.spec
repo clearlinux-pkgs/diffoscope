@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 87
-Release  : 28
+Release  : 29
 URL      : http://pypi.debian.net/diffoscope/diffoscope-87.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-87.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-87.tar.gz.asc
