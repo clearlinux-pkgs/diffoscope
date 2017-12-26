@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0816B9E18C762BAD (mapreri@gmail.com)
 #
 Name     : diffoscope
-Version  : 89
-Release  : 32
-URL      : http://pypi.debian.net/diffoscope/diffoscope-89.tar.gz
-Source0  : http://pypi.debian.net/diffoscope/diffoscope-89.tar.gz
-Source99 : http://pypi.debian.net/diffoscope/diffoscope-89.tar.gz.asc
+Version  : 90
+Release  : 33
+URL      : http://pypi.debian.net/diffoscope/diffoscope-90.tar.gz
+Source0  : http://pypi.debian.net/diffoscope/diffoscope-90.tar.gz
+Source99 : http://pypi.debian.net/diffoscope/diffoscope-90.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -58,14 +58,14 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-89
+%setup -q -n diffoscope-90
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1514243153
+export SOURCE_DATE_EPOCH=1514324014
 python3 setup.py build -b py3
 
 %install
