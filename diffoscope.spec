@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 96
-Release  : 42
-URL      : http://pypi.debian.net/diffoscope/diffoscope-96.tar.gz
-Source0  : http://pypi.debian.net/diffoscope/diffoscope-96.tar.gz
-Source99 : http://pypi.debian.net/diffoscope/diffoscope-96.tar.gz.asc
+Version  : 97
+Release  : 43
+URL      : http://pypi.debian.net/diffoscope/diffoscope-97.tar.gz
+Source0  : http://pypi.debian.net/diffoscope/diffoscope-97.tar.gz
+Source99 : http://pypi.debian.net/diffoscope/diffoscope-97.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -24,7 +24,6 @@ BuildRequires : libarchive-c
 BuildRequires : libarchive-dev
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
 BuildRequires : python-magic
 BuildRequires : python-rpm
 BuildRequires : python3-dev
@@ -69,14 +68,14 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-96
+%setup -q -n diffoscope-97
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530082338
+export SOURCE_DATE_EPOCH=1530235866
 python3 setup.py build -b py3
 
 %install
