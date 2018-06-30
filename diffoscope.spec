@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 98
-Release  : 44
+Release  : 45
 URL      : http://pypi.debian.net/diffoscope/diffoscope-98.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-98.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-98.tar.gz.asc
