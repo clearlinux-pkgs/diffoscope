@@ -1,3 +1,86 @@
+diffoscope (99) unstable; urgency=medium
+
+  [ Xavier Briand ]
+  * Add lz4 comparator.  Closes: #901548; !4
+
+  [ Paul Wise ]
+  * Clear the progress bar after completion.  Closes: #901758
+    Handle terminals that do not support erasing the line by filling the
+    terminal with spaces.  Ignore output devices that are not terminals.
+  * Do not delete the current terminal line for every progress bar update.
+    The erasure was also causing the progress bar to flicker.
+
+  [ Mattia Rizzolo ]
+  * Add a gitlab CI script.  !8
+  * tempfiles:
+    + Set the base directory only if the caller didn't specify one already.
+    + Do not append '_diffoscope' to the temporary file names, as they are now
+      all in their namespaced directory already.
+    + Empty the list of known tempfiles after removing them.  Closes: #902709
+  * external_tools:
+    + Fix package name, s/xmlutils/xmlbeans/.
+  * tests/test_tools: fix test if /sbin contains a directory.  MR: !2
+    Thanks to Chris Lamb <lamby@debian.org> for the patch.
+  * logging:
+    + Move the computation of the terminal line eraser into logging.py
+    + Always clean the line before printing a log message
+  * main:
+    + Clean the terminal line before printing a traceback.
+    + Be sure to print 'Keyboard Interrupt' if that happens.
+  * comparators:
+    + Do not shadow the original import errors.  MR: !7
+  * d/control:
+    + Bump Standards-Version to 4.1.5, no changes needed.
+    + Add Build-Dependency on procyon-decompiler, to run the tests.
+  * d/tests:
+    + Autogenerate d/tests/control with all the recommends listed as
+      dependencies, so autopkgtest is appropriately triggered whenever one of
+      those packages changes.  Closes: #902920
+
+  [ anthraxx ]
+  * comparators.utils:libarchive:
+    + Add compatibility code for python-libarchive >= 2.8.  MR: !6
+
+ -- Mattia Rizzolo <mattia@debian.org>  Sun, 08 Jul 2018 20:07:06 +0200
+
+diffoscope (98) unstable; urgency=medium
+
+  * Fix compatibility with Python 3.7. (Closes: #902650)
+
+ -- Chris Lamb <lamby@debian.org>  Fri, 29 Jun 2018 08:19:25 +0100
+
+diffoscope (97) unstable; urgency=medium
+
+  * Create all temporary directories within a top-level dir. (Closes: #902627)
+  * tests/conftest.py: Fix compatibility with pytest 3.6.2-1, currently in
+    Debian experimental.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 28 Jun 2018 21:38:50 +0100
+
+diffoscope (96) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * Drop dependency on pdftk as it relies on GCJ, relying on the pdftotext
+    fallback. (Closes: #893702)
+  * Change the "No file format specific differences found inside, yet data
+    differs" message to be clearer that diffoscope "knows" about this file
+    format yet could not be helpful in this case.
+  * Don't append a rather useless "(data)" suffix from file(1).
+  * Comply with a number of PEP8 recommendations:
+    - E226 - Add missing whitespaces around operators.
+    - E241 - Fix extraneous whitespaces around keywords.
+    - E251 - Remove whitespace around parameter '=' signs.
+    - E302 - Add missing 2 blank lines.
+    - E501 - Try to make lines fit to length.
+    - E502 - Remove extraneous escape of newline.
+    - E731 - Don't assign lambda expressions.
+    - E121, E122, E126, E128 - Fix badly indented lines.
+
+  [ Xavier Briand ]
+  * Add merge request details to contributing documentation.
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 16 Jun 2018 22:19:28 +0200
+
 diffoscope (95) unstable; urgency=medium
 
   [ Mattia Rizzolo ]
