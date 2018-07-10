@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 99
-Release  : 49
+Release  : 50
 URL      : http://pypi.debian.net/diffoscope/diffoscope-99.tar.gz
 Source0  : http://pypi.debian.net/diffoscope/diffoscope-99.tar.gz
 Source99 : http://pypi.debian.net/diffoscope/diffoscope-99.tar.gz.asc
