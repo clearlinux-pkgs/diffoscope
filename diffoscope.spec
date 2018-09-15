@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 100
-Release  : 52
-URL      : https://files.pythonhosted.org/packages/2a/c4/32e8addb6f7f8365f765ad182b4df7456c41db837f6de56bc078ede658c6/diffoscope-100.tar.gz
-Source0  : https://files.pythonhosted.org/packages/2a/c4/32e8addb6f7f8365f765ad182b4df7456c41db837f6de56bc078ede658c6/diffoscope-100.tar.gz
-Source99 : https://files.pythonhosted.org/packages/2a/c4/32e8addb6f7f8365f765ad182b4df7456c41db837f6de56bc078ede658c6/diffoscope-100.tar.gz.asc
+Version  : 101
+Release  : 53
+URL      : https://files.pythonhosted.org/packages/91/85/720be28a3cde316b5f61c656f158340b60e853e5bb974ced50c07881828b/diffoscope-101.tar.gz
+Source0  : https://files.pythonhosted.org/packages/91/85/720be28a3cde316b5f61c656f158340b60e853e5bb974ced50c07881828b/diffoscope-101.tar.gz
+Source99 : https://files.pythonhosted.org/packages/91/85/720be28a3cde316b5f61c656f158340b60e853e5bb974ced50c07881828b/diffoscope-101.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -65,21 +65,21 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-100
+%setup -q -n diffoscope-101
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535819507
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1537029369
+python3 setup.py build
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/diffoscope
 cp COPYING %{buildroot}/usr/share/doc/diffoscope/COPYING
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
