@@ -1,3 +1,68 @@
+diffoscope (102) unstable; urgency=medium
+
+  [ Chris Lamb ]
+  * Fix tests under colord >= 1.4.3.  Closes: #908900
+
+  [ Xavier Briand ]
+  * Add an "Add a comparator" section in CONTRIBUTING.  MR: !9
+
+  [ Mattia Rizzolo ]
+  * debian: Use the new debhelper-compat(=11) build dep and drop d/compat.
+
+  [ Marek Marczykowski-Górecki ]
+  * comparators/json: Try fuzzy matching for non-text files too.
+    This avoids loading very large file just to discover they aren't JSON.
+    Closes: #909122
+
+ -- Mattia Rizzolo <mattia@debian.org>  Sun, 23 Sep 2018 10:43:40 +0200
+
+diffoscope (101) unstable; urgency=medium
+
+  * Fix testsuite under LLVM >= 7.0. (Closes: #908074)
+  * Substvar generation:
+    - Ensure Debian substvar generation is deterministic regardless of
+      installed packages. (Closes: #908072)
+    - Clarify distinction between tools (eg. gpg) and packages (eg. gnupg) when
+      generating Debian substvars.
+    - Revert updating generated debian/tests/control made in diffoscope 100.
+  * Disable binwalk's own user configuration for predictable results and to
+    ensure it does not create unnecessary directories. (Closes: #903444)
+  * Ensure we return "bytes" objects from Command.filter to avoid a
+    "TypeError: Unicode-objects must be encoded before hashing" traceback.
+  * Don't print GPG output in diffoscope.changes.
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 15 Sep 2018 16:37:45 +0100
+
+diffoscope (100) unstable; urgency=medium
+
+  [ Alexis Murzeau ]
+  * Correct matching of .deb archive members. (Closes: #903565)
+
+  [ Chris Lamb ]
+  * Support .deb archives that contain an uncompressed control.tar and data.tar
+    Thanks to Roderich Schupp <roderich.schupp@gmail.com>.
+    (Closes: #903391, #903401)
+  * Wrap jsondiff calls with try-except to prevent fatal errors.
+    (Closes: #903447, #903449)
+  * Don't include the filename in llvm-bcanalyzer results. (Closes: #905598)
+  * Update generated debian/tests/control.
+  * Bump Standards-Version to 4.2.1.
+
+  [ Daniel Kahn Gillmor ]
+  * Avoid line eraser error on dumb terminals. (Closes: #906967)
+  * Correct spelling of ereser to eraser.
+
+  [ Mattia Rizzolo ]
+  * On Debian, do not require apktool on ppc64el and s390x, ogvideotools on
+    s390x and fp-utils on ppc64el and s390x as they are not installable there.
+  * Explicitly add `file` to the dependencies of autopkgtest to have the tests
+    triggered whenever `file` changes
+
+  [ Ricardo Gaviria ]
+  * Handle errors with encrypted archive files. (Closes: #904685)
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 01 Sep 2018 09:09:48 +0100
+
 diffoscope (99) unstable; urgency=medium
 
   [ Xavier Briand ]
