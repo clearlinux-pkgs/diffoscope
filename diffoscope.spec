@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0816B9E18C762BAD (mapreri@gmail.com)
 #
 Name     : diffoscope
-Version  : 102
-Release  : 54
-URL      : https://files.pythonhosted.org/packages/24/28/057571b62db9f0b640f4fcd101c7975382921d7d0596410ea0c461a93cc2/diffoscope-102.tar.gz
-Source0  : https://files.pythonhosted.org/packages/24/28/057571b62db9f0b640f4fcd101c7975382921d7d0596410ea0c461a93cc2/diffoscope-102.tar.gz
-Source99 : https://files.pythonhosted.org/packages/24/28/057571b62db9f0b640f4fcd101c7975382921d7d0596410ea0c461a93cc2/diffoscope-102.tar.gz.asc
+Version  : 103
+Release  : 55
+URL      : https://files.pythonhosted.org/packages/c8/23/06d76f7867c2153b5f3f5d74cd5e5214fb0e7d62ae838dab15e9507d8eda/diffoscope-103.tar.gz
+Source0  : https://files.pythonhosted.org/packages/c8/23/06d76f7867c2153b5f3f5d74cd5e5214fb0e7d62ae838dab15e9507d8eda/diffoscope-103.tar.gz
+Source99 : https://files.pythonhosted.org/packages/c8/23/06d76f7867c2153b5f3f5d74cd5e5214fb0e7d62ae838dab15e9507d8eda/diffoscope-103.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 MIT
@@ -73,14 +73,14 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-102
+%setup -q -n diffoscope-103
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1537755977
+export SOURCE_DATE_EPOCH=1538584784
 python3 setup.py build
 
 %install
@@ -102,10 +102,10 @@ echo ----[ mark ]----
 
 %files doc
 %defattr(0644,root,root,0755)
-%doc /usr/share/doc/diffoscope/*
+/usr/share/doc/diffoscope/debian_copyright
 
 %files license
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/doc/diffoscope/COPYING
 
 %files python

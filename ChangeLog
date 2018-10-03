@@ -1,3 +1,15 @@
+diffoscope (103) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * In Debian, list liblz4-tool as an alternative to the lz4 package.
+    stretch only has the former.
+
+  [ Chris Lamb ]
+  * Strip trailing whitespace from ssconvert(1) output to support
+    gnumeric 1.12.43.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Wed, 03 Oct 2018 16:35:59 +0200
+
 diffoscope (102) unstable; urgency=medium
 
   [ Chris Lamb ]
