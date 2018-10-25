@@ -5,21 +5,24 @@
 # Source0 file verified with key 0x0816B9E18C762BAD (mapreri@gmail.com)
 #
 Name     : diffoscope
-Version  : 103
-Release  : 55
-URL      : https://files.pythonhosted.org/packages/c8/23/06d76f7867c2153b5f3f5d74cd5e5214fb0e7d62ae838dab15e9507d8eda/diffoscope-103.tar.gz
-Source0  : https://files.pythonhosted.org/packages/c8/23/06d76f7867c2153b5f3f5d74cd5e5214fb0e7d62ae838dab15e9507d8eda/diffoscope-103.tar.gz
-Source99 : https://files.pythonhosted.org/packages/c8/23/06d76f7867c2153b5f3f5d74cd5e5214fb0e7d62ae838dab15e9507d8eda/diffoscope-103.tar.gz.asc
+Version  : 104
+Release  : 56
+URL      : https://files.pythonhosted.org/packages/fc/b2/3bb5d8e35dc8139e7ad3106d74c2b06fd38494ed96473630d09437348182/diffoscope-104.tar.gz
+Source0  : https://files.pythonhosted.org/packages/fc/b2/3bb5d8e35dc8139e7ad3106d74c2b06fd38494ed96473630d09437348182/diffoscope-104.tar.gz
+Source99 : https://files.pythonhosted.org/packages/fc/b2/3bb5d8e35dc8139e7ad3106d74c2b06fd38494ed96473630d09437348182/diffoscope-104.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0 MIT
-Requires: diffoscope-bin
-Requires: diffoscope-python3
-Requires: diffoscope-license
-Requires: diffoscope-python
+Requires: diffoscope-bin = %{version}-%{release}
+Requires: diffoscope-license = %{version}-%{release}
+Requires: diffoscope-python = %{version}-%{release}
+Requires: diffoscope-python3 = %{version}-%{release}
+Requires: argcomplete
+Requires: defusedxml
 Requires: distro
 Requires: libarchive-c
 Requires: python-magic
+Requires: pyxattr
 BuildRequires : buildreq-distutils3
 BuildRequires : libarchive-c
 BuildRequires : libarchive-dev
@@ -36,14 +39,6 @@ Requires: diffoscope-license = %{version}-%{release}
 
 %description bin
 bin components for the diffoscope package.
-
-
-%package doc
-Summary: doc components for the diffoscope package.
-Group: Documentation
-
-%description doc
-doc components for the diffoscope package.
 
 
 %package license
@@ -73,21 +68,21 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-103
+%setup -q -n diffoscope-104
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1538584784
+export SOURCE_DATE_EPOCH=1540478126
 python3 setup.py build
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/diffoscope
-cp COPYING %{buildroot}/usr/share/doc/diffoscope/COPYING
-cp debian/copyright %{buildroot}/usr/share/doc/diffoscope/debian_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
+cp COPYING %{buildroot}/usr/share/package-licenses/diffoscope/COPYING
+cp debian/copyright %{buildroot}/usr/share/package-licenses/diffoscope/debian_copyright
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -100,13 +95,10 @@ echo ----[ mark ]----
 %defattr(-,root,root,-)
 /usr/bin/diffoscope
 
-%files doc
-%defattr(0644,root,root,0755)
-/usr/share/doc/diffoscope/debian_copyright
-
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/doc/diffoscope/COPYING
+/usr/share/package-licenses/diffoscope/COPYING
+/usr/share/package-licenses/diffoscope/debian_copyright
 
 %files python
 %defattr(-,root,root,-)
