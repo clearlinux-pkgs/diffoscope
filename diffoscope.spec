@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 107
-Release  : 59
-URL      : https://files.pythonhosted.org/packages/df/24/53bf51d103c4c1f5c26923bb158b0bdbe00a476945f586f662265e1087e0/diffoscope-107.tar.gz
-Source0  : https://files.pythonhosted.org/packages/df/24/53bf51d103c4c1f5c26923bb158b0bdbe00a476945f586f662265e1087e0/diffoscope-107.tar.gz
-Source99 : https://files.pythonhosted.org/packages/df/24/53bf51d103c4c1f5c26923bb158b0bdbe00a476945f586f662265e1087e0/diffoscope-107.tar.gz.asc
-Summary  : in-depth comparison of files, archives, and directories
+Version  : 108
+Release  : 60
+URL      : https://files.pythonhosted.org/packages/45/33/d80f0f61e601fb9de7630b92bc8f88e8ecb5218858e000e00bc7510317c9/diffoscope-108.tar.gz
+Source0  : https://files.pythonhosted.org/packages/45/33/d80f0f61e601fb9de7630b92bc8f88e8ecb5218858e000e00bc7510317c9/diffoscope-108.tar.gz
+Source99 : https://files.pythonhosted.org/packages/45/33/d80f0f61e601fb9de7630b92bc8f88e8ecb5218858e000e00bc7510317c9/diffoscope-108.tar.gz.asc
+Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: diffoscope-bin = %{version}-%{release}
@@ -20,7 +20,9 @@ Requires: diffoscope-python3 = %{version}-%{release}
 Requires: argcomplete
 Requires: defusedxml
 Requires: distro
+Requires: jsondiff
 Requires: libarchive-c
+Requires: progressbar
 Requires: python-magic
 Requires: pyxattr
 BuildRequires : buildreq-distutils3
@@ -30,7 +32,11 @@ BuildRequires : python-magic
 BuildRequires : python-rpm
 
 %description
+diffoscope
 ==========
+.. only:: not manpage
+.. image:: https://badge.fury.io/py/diffoscope.svg
+:target: http://badge.fury.io/py/diffoscope
 
 %package bin
 Summary: bin components for the diffoscope package.
@@ -68,19 +74,18 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-107
+%setup -q -n diffoscope-108
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545333950
+export SOURCE_DATE_EPOCH=1547651771
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %install
-export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
 cp COPYING %{buildroot}/usr/share/package-licenses/diffoscope/COPYING
