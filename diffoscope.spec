@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 112
-Release  : 63
-URL      : https://files.pythonhosted.org/packages/fa/fc/1183fdc089a09b612acb1673c54c7a606230c060fa95f367a3a135d97ab8/diffoscope-112.tar.gz
-Source0  : https://files.pythonhosted.org/packages/fa/fc/1183fdc089a09b612acb1673c54c7a606230c060fa95f367a3a135d97ab8/diffoscope-112.tar.gz
-Source99 : https://files.pythonhosted.org/packages/fa/fc/1183fdc089a09b612acb1673c54c7a606230c060fa95f367a3a135d97ab8/diffoscope-112.tar.gz.asc
+Version  : 113
+Release  : 65
+URL      : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz
+Source0  : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz
+Source99 : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz.asc
 Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -18,6 +18,7 @@ Requires: diffoscope-license = %{version}-%{release}
 Requires: diffoscope-python = %{version}-%{release}
 Requires: diffoscope-python3 = %{version}-%{release}
 Requires: argcomplete
+Requires: binwalk
 Requires: defusedxml
 Requires: distro
 Requires: jsondiff
@@ -74,18 +75,20 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-112
+%setup -q -n diffoscope-113
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1550586355
+export SOURCE_DATE_EPOCH=1551757457
+export LDFLAGS="${LDFLAGS} -fno-lto"
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
 cp COPYING %{buildroot}/usr/share/package-licenses/diffoscope/COPYING
