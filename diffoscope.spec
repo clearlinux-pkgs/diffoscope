@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 113
-Release  : 65
+Release  : 66
 URL      : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz
 Source99 : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz.asc
