@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 113
-Release  : 66
-URL      : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz
-Source0  : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz
-Source99 : https://files.pythonhosted.org/packages/e2/d5/592159de616caa5db9d7e13043f0405e952e248c282935c2e5a4b85660fe/diffoscope-113.tar.gz.asc
+Version  : 114
+Release  : 67
+URL      : https://files.pythonhosted.org/packages/93/70/18009604dbc54001b084ca67c9bd73c7cdadd885d402be05cc0cbe3c0784/diffoscope-114.tar.gz
+Source0  : https://files.pythonhosted.org/packages/93/70/18009604dbc54001b084ca67c9bd73c7cdadd885d402be05cc0cbe3c0784/diffoscope-114.tar.gz
+Source99 : https://files.pythonhosted.org/packages/93/70/18009604dbc54001b084ca67c9bd73c7cdadd885d402be05cc0cbe3c0784/diffoscope-114.tar.gz.asc
 Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -75,15 +75,14 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-113
+%setup -q -n diffoscope-114
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551757457
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1556502967
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
