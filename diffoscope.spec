@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 120
-Release  : 73
-URL      : https://files.pythonhosted.org/packages/62/14/bd9a9879225ed757cdd29e4b3d36ecdecb0f6333996d2e9ce3b9f4df3474/diffoscope-120.tar.gz
-Source0  : https://files.pythonhosted.org/packages/62/14/bd9a9879225ed757cdd29e4b3d36ecdecb0f6333996d2e9ce3b9f4df3474/diffoscope-120.tar.gz
-Source1 : https://files.pythonhosted.org/packages/62/14/bd9a9879225ed757cdd29e4b3d36ecdecb0f6333996d2e9ce3b9f4df3474/diffoscope-120.tar.gz.asc
+Version  : 121
+Release  : 74
+URL      : https://files.pythonhosted.org/packages/61/ad/323323baf9f2caae3d5f5bcd5efc81fd1a05248cb7e9e76f5107e4abd8c1/diffoscope-121.tar.gz
+Source0  : https://files.pythonhosted.org/packages/61/ad/323323baf9f2caae3d5f5bcd5efc81fd1a05248cb7e9e76f5107e4abd8c1/diffoscope-121.tar.gz
+Source1 : https://files.pythonhosted.org/packages/61/ad/323323baf9f2caae3d5f5bcd5efc81fd1a05248cb7e9e76f5107e4abd8c1/diffoscope-121.tar.gz.asc
 Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -81,14 +81,15 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-120
+%setup -q -n diffoscope-121
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1564497904
+export SOURCE_DATE_EPOCH=1565997838
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
