@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 125
-Release  : 77
-URL      : https://files.pythonhosted.org/packages/1a/a0/55d41368936fe5ee100bee199638d36be99a7946e57208e698cb8d482eec/diffoscope-125.tar.gz
-Source0  : https://files.pythonhosted.org/packages/1a/a0/55d41368936fe5ee100bee199638d36be99a7946e57208e698cb8d482eec/diffoscope-125.tar.gz
-Source1 : https://files.pythonhosted.org/packages/1a/a0/55d41368936fe5ee100bee199638d36be99a7946e57208e698cb8d482eec/diffoscope-125.tar.gz.asc
+Version  : 126
+Release  : 78
+URL      : https://files.pythonhosted.org/packages/7e/19/99beff4108a14cbd097533b92ff0b4210735a2ab27109ef0018ca7153650/diffoscope-126.tar.gz
+Source0  : https://files.pythonhosted.org/packages/7e/19/99beff4108a14cbd097533b92ff0b4210735a2ab27109ef0018ca7153650/diffoscope-126.tar.gz
+Source1 : https://files.pythonhosted.org/packages/7e/19/99beff4108a14cbd097533b92ff0b4210735a2ab27109ef0018ca7153650/diffoscope-126.tar.gz.asc
 Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -81,14 +81,14 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-125
+%setup -q -n diffoscope-126
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568858424
+export SOURCE_DATE_EPOCH=1571085813
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -105,7 +105,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
-cp COPYING %{buildroot}/usr/share/package-licenses/diffoscope/COPYING
+cp %{_builddir}/diffoscope-126/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -120,7 +120,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/diffoscope/COPYING
+/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 
 %files python
 %defattr(-,root,root,-)
