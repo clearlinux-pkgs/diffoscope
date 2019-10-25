@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 127
-Release  : 79
-URL      : https://files.pythonhosted.org/packages/86/37/489e7283deb8ca9312339fc6a0d6aa112947e2a2a2e5fc79520bc363d7f8/diffoscope-127.tar.gz
-Source0  : https://files.pythonhosted.org/packages/86/37/489e7283deb8ca9312339fc6a0d6aa112947e2a2a2e5fc79520bc363d7f8/diffoscope-127.tar.gz
-Source1 : https://files.pythonhosted.org/packages/86/37/489e7283deb8ca9312339fc6a0d6aa112947e2a2a2e5fc79520bc363d7f8/diffoscope-127.tar.gz.asc
-Summary  : in-depth comparison of files, archives, and directories
+Version  : 128
+Release  : 80
+URL      : https://files.pythonhosted.org/packages/89/3f/e99b3a34f7b57b9680582936db229bba361e12b088a20cf82ebd3fafcd8c/diffoscope-128.tar.gz
+Source0  : https://files.pythonhosted.org/packages/89/3f/e99b3a34f7b57b9680582936db229bba361e12b088a20cf82ebd3fafcd8c/diffoscope-128.tar.gz
+Source1 : https://files.pythonhosted.org/packages/89/3f/e99b3a34f7b57b9680582936db229bba361e12b088a20cf82ebd3fafcd8c/diffoscope-128.tar.gz.asc
+Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: diffoscope-bin = %{version}-%{release}
@@ -38,9 +38,13 @@ BuildRequires : progressbar
 BuildRequires : python-magic
 BuildRequires : python-rpm
 BuildRequires : pyxattr
+BuildRequires : util-linux
 
 %description
+diffoscope
 ==========
+.. image:: https://badge.fury.io/py/diffoscope.svg
+:target: http://badge.fury.io/py/diffoscope
 
 %package bin
 Summary: bin components for the diffoscope package.
@@ -78,14 +82,15 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-127
+%setup -q -n diffoscope-128
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571958986
+export SOURCE_DATE_EPOCH=1572015546
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -101,7 +106,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
-cp %{_builddir}/diffoscope-127/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/diffoscope-128/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
