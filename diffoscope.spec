@@ -6,11 +6,11 @@
 #
 Name     : diffoscope
 Version  : 129
-Release  : 81
+Release  : 82
 URL      : https://files.pythonhosted.org/packages/ec/bd/be574e8dd0a69358af60d2ea4347cb40eb6dd9acc5a9443af1c92122b1e0/diffoscope-129.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ec/bd/be574e8dd0a69358af60d2ea4347cb40eb6dd9acc5a9443af1c92122b1e0/diffoscope-129.tar.gz
 Source1 : https://files.pythonhosted.org/packages/ec/bd/be574e8dd0a69358af60d2ea4347cb40eb6dd9acc5a9443af1c92122b1e0/diffoscope-129.tar.gz.asc
-Summary  : Tool for in-depth comparison of files, archives, and directories
+Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: diffoscope-bin = %{version}-%{release}
@@ -36,15 +36,11 @@ BuildRequires : libarchive-c
 BuildRequires : libarchive-dev
 BuildRequires : progressbar
 BuildRequires : python-magic
-BuildRequires : python-rpm
 BuildRequires : pyxattr
-BuildRequires : util-linux
+BuildRequires : rpm
 
 %description
-diffoscope
 ==========
-.. image:: https://badge.fury.io/py/diffoscope.svg
-:target: http://badge.fury.io/py/diffoscope
 
 %package bin
 Summary: bin components for the diffoscope package.
@@ -83,14 +79,14 @@ python3 components for the diffoscope package.
 
 %prep
 %setup -q -n diffoscope-129
+cd %{_builddir}/diffoscope-129
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572273366
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1574116592
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
