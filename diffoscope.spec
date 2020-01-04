@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 133
-Release  : 86
-URL      : https://files.pythonhosted.org/packages/40/11/a64df15c88e77bfb19430ad66ff8c15b0cd69949e9b723c88b0562addcb8/diffoscope-133.tar.gz
-Source0  : https://files.pythonhosted.org/packages/40/11/a64df15c88e77bfb19430ad66ff8c15b0cd69949e9b723c88b0562addcb8/diffoscope-133.tar.gz
-Source1 : https://files.pythonhosted.org/packages/40/11/a64df15c88e77bfb19430ad66ff8c15b0cd69949e9b723c88b0562addcb8/diffoscope-133.tar.gz.asc
+Version  : 134
+Release  : 87
+URL      : https://files.pythonhosted.org/packages/9b/47/7bf01fed1ad268cd64229a69031ec6898e523133b293cac0baa66eb12937/diffoscope-134.tar.gz
+Source0  : https://files.pythonhosted.org/packages/9b/47/7bf01fed1ad268cd64229a69031ec6898e523133b293cac0baa66eb12937/diffoscope-134.tar.gz
+Source1  : https://files.pythonhosted.org/packages/9b/47/7bf01fed1ad268cd64229a69031ec6898e523133b293cac0baa66eb12937/diffoscope-134.tar.gz.asc
 Summary  : Tool for in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -81,15 +81,15 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-133
-cd %{_builddir}/diffoscope-133
+%setup -q -n diffoscope-134
+cd %{_builddir}/diffoscope-134
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1575276848
+export SOURCE_DATE_EPOCH=1578152280
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -106,7 +106,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
-cp %{_builddir}/diffoscope-133/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/diffoscope-134/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
