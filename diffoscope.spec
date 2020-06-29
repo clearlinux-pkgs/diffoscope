@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 148
-Release  : 103
-URL      : https://files.pythonhosted.org/packages/0c/8e/d77d1845f686c2676fe23796e51962ffcaf45a3b103d7f842c44674c810a/diffoscope-148.tar.gz
-Source0  : https://files.pythonhosted.org/packages/0c/8e/d77d1845f686c2676fe23796e51962ffcaf45a3b103d7f842c44674c810a/diffoscope-148.tar.gz
-Source1  : https://files.pythonhosted.org/packages/0c/8e/d77d1845f686c2676fe23796e51962ffcaf45a3b103d7f842c44674c810a/diffoscope-148.tar.gz.asc
+Version  : 149
+Release  : 104
+URL      : https://files.pythonhosted.org/packages/00/9c/24f31ba83d7a0a50c48a5bf7ff0ef875ebfba49de8dfa3b61832d6981cab/diffoscope-149.tar.gz
+Source0  : https://files.pythonhosted.org/packages/00/9c/24f31ba83d7a0a50c48a5bf7ff0ef875ebfba49de8dfa3b61832d6981cab/diffoscope-149.tar.gz
+Source1  : https://files.pythonhosted.org/packages/00/9c/24f31ba83d7a0a50c48a5bf7ff0ef875ebfba49de8dfa3b61832d6981cab/diffoscope-149.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -72,24 +72,21 @@ python components for the diffoscope package.
 Summary: python3 components for the diffoscope package.
 Group: Default
 Requires: python3-core
-Provides: pypi(diffoscope)
-Requires: pypi(libarchive_c)
-Requires: pypi(python_magic)
 
 %description python3
 python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-148
-cd %{_builddir}/diffoscope-148
+%setup -q -n diffoscope-149
+cd %{_builddir}/diffoscope-149
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1592582591
+export SOURCE_DATE_EPOCH=1593452679
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -105,7 +102,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
-cp %{_builddir}/diffoscope-148/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/diffoscope-149/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
