@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 184
-Release  : 149
+Release  : 150
 URL      : https://files.pythonhosted.org/packages/0f/37/e33efda4905c681760794dc4b3b58152f9d72788e767f989eb80762d4e58/diffoscope-184.tar.gz
 Source0  : https://files.pythonhosted.org/packages/0f/37/e33efda4905c681760794dc4b3b58152f9d72788e767f989eb80762d4e58/diffoscope-184.tar.gz
 Source1  : https://files.pythonhosted.org/packages/0f/37/e33efda4905c681760794dc4b3b58152f9d72788e767f989eb80762d4e58/diffoscope-184.tar.gz.asc
