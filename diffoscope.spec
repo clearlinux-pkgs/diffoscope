@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x1E953E27D4311E58 (lamby@gnu.org)
 #
 Name     : diffoscope
-Version  : 192
-Release  : 162
-URL      : https://files.pythonhosted.org/packages/fd/ff/2d5beed6cb6cff0ff6d74183c2e961f376c32138cc6e455087203ca0b0b2/diffoscope-192.tar.gz
-Source0  : https://files.pythonhosted.org/packages/fd/ff/2d5beed6cb6cff0ff6d74183c2e961f376c32138cc6e455087203ca0b0b2/diffoscope-192.tar.gz
-Source1  : https://files.pythonhosted.org/packages/fd/ff/2d5beed6cb6cff0ff6d74183c2e961f376c32138cc6e455087203ca0b0b2/diffoscope-192.tar.gz.asc
+Version  : 193
+Release  : 163
+URL      : https://files.pythonhosted.org/packages/b0/c7/ae7879af06be4db0b2440e549a03a2fa25112635faf1f91967f387eb8282/diffoscope-193.tar.gz
+Source0  : https://files.pythonhosted.org/packages/b0/c7/ae7879af06be4db0b2440e549a03a2fa25112635faf1f91967f387eb8282/diffoscope-193.tar.gz
+Source1  : https://files.pythonhosted.org/packages/b0/c7/ae7879af06be4db0b2440e549a03a2fa25112635faf1f91967f387eb8282/diffoscope-193.tar.gz.asc
 Summary  : in-depth comparison of files, archives, and directories
 Group    : Development/Tools
 License  : GPL-3.0
@@ -17,26 +17,10 @@ Requires: diffoscope-bin = %{version}-%{release}
 Requires: diffoscope-license = %{version}-%{release}
 Requires: diffoscope-python = %{version}-%{release}
 Requires: diffoscope-python3 = %{version}-%{release}
-Requires: argcomplete
-Requires: binwalk
-Requires: defusedxml
-Requires: distro
-Requires: jsondiff
-Requires: libarchive-c
-Requires: progressbar
-Requires: python-magic
-Requires: pyxattr
-BuildRequires : argcomplete
-BuildRequires : binwalk
 BuildRequires : buildreq-distutils3
-BuildRequires : defusedxml
-BuildRequires : distro
-BuildRequires : jsondiff
-BuildRequires : libarchive-c
 BuildRequires : libarchive-dev
-BuildRequires : progressbar
-BuildRequires : python-magic
-BuildRequires : pyxattr
+BuildRequires : pypi(libarchive_c)
+BuildRequires : pypi(python_magic)
 BuildRequires : rpm
 
 %description
@@ -84,15 +68,15 @@ python3 components for the diffoscope package.
 
 
 %prep
-%setup -q -n diffoscope-192
-cd %{_builddir}/diffoscope-192
+%setup -q -n diffoscope-193
+cd %{_builddir}/diffoscope-193
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1636751757
+export SOURCE_DATE_EPOCH=1637366464
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -108,7 +92,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/diffoscope
-cp %{_builddir}/diffoscope-192/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/diffoscope-193/COPYING %{buildroot}/usr/share/package-licenses/diffoscope/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
