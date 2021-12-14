@@ -6,7 +6,7 @@
 #
 Name     : diffoscope
 Version  : 196
-Release  : 166
+Release  : 167
 URL      : https://files.pythonhosted.org/packages/67/df/f70c71a91ebb7e115ad80ad6ae307a55090596c99ef1cf24b87beb7d8334/diffoscope-196.tar.gz
 Source0  : https://files.pythonhosted.org/packages/67/df/f70c71a91ebb7e115ad80ad6ae307a55090596c99ef1cf24b87beb7d8334/diffoscope-196.tar.gz
 Source1  : https://files.pythonhosted.org/packages/67/df/f70c71a91ebb7e115ad80ad6ae307a55090596c99ef1cf24b87beb7d8334/diffoscope-196.tar.gz.asc
