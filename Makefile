@@ -1,5 +1,5 @@
 PKG_NAME := diffoscope
-URL = https://files.pythonhosted.org/packages/a6/1b/85f99018b287762d79fb9f28fa813fd087359f9c63a26c45ba12fc0c024d/diffoscope-197.tar.gz
+URL = https://files.pythonhosted.org/packages/a8/98/4533cadef42a19537e901593990bd781f957ded5bf3993f4a5a83ea712e1/diffoscope-198.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
